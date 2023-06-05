@@ -63,4 +63,3 @@ Year and team name of all the champions:
 List of teams that start with 'Co':
 Colombia
 Costa Rica
-
