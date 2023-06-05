@@ -25,13 +25,13 @@ echo -e "\nNumber of games where the winning team scored more than two goals:"
 echo "$($PSQL "SELECT COUNT(winner_goals) FROM games WHERE winner_goals > 2")" 
 
 echo -e "\nWinner of the 2018 tournament team name:"
-echo "$($PSQL "SELECT team_name FROM games join teams ON games.winner_id = teams.team_id WHERE ( year=2018 AND round='Final' )")"
+echo "$($PSQL "SELECT team_name FROM games JOIN teams ON games.winner_id = teams.team_id WHERE year=2018 AND round='Final'")"
 
 echo -e "\nList of teams who played in the 2014 'Eighth-Final' round:"
-echo "$($PSQL "SELECT team_name FROM teams JOIN games ON teams.team_id = games.winner_id WHERE year=2014 and round='Eighth-Final';")"
+echo "$($PSQL "SELECT team_name from games JOIN teams ON games.winner_id = teams.team_id OR games.opponent_id = teams.team_id WHERE round='Eighth-Final' AND year=2014 ORDER BY team_name")"
 
 echo -e "\nList of unique winning team names in the whole data set:"
-echo "$($PSQL "SELECT DISTINCT(team_name) FROM teams JOIN games ON teams.team_id = games.winner_id")"
+echo "$($PSQL "SELECT DISTINCT(team_name) FROM teams JOIN games ON teams.team_id = games.winner_id ORDER BY team_name")"
 
 echo -e "\nYear and team name of all the champions:"
 echo "$($PSQL "SELECT year, team_name FROM teams JOIN games ON teams.team_id = games.winner_id WHERE round='Final'")"
